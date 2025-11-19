@@ -169,6 +169,6 @@
 - N poté násobí normálový vektor
 - **Inverze**
 - M * M<sup>-1</sup> = 1
-- **Transpoze** - Prohození řádků a sloupců  
+- **Transpozice** - Prohození řádků a sloupců  
 | a  b | --- | a  c |  
 | c  d | --- | b  d |
