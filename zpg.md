@@ -1,17 +1,16 @@
 # ZPG
+[1. Vykreslovaci pipeline](#1-vykreslovaci-pipeline)  
+[2. Textury v Openggl typy-a-použití-v-pg](#2-textury-v-openggl-typy-a-použití-v-pg)  
+[3. Identifikace zbufferstencil-unproject](#3-identifikace-zbufferstencil-unproject)  
+[4. Promitani](#4-promitani)  
+[5. Osvětlovací phongův systém definice-a-použití-v-pg](#5-osvětlovací-phongův-systém-definice-a-použití-v-pg)  
+[6. Algoritmy viditelnostimaliruv-a-z-buffer](#6-algoritmy-viditelnostimaliruv-a-z-buffer)  
+[7. Bezier definice-a-použití-v-pg](#7-bezier-definice-a-použití-v-pg)  
+[8. Rotace 3D a 2D](#8-rotace-3d-a-2d-odvození-použití-v-pg)  
+[9. Skybox použití-v-opengl](#9-skybox-použití-v-opengl)  
+[10. Transformace pouziti-v-pg](#10-transformace-pouziti-v-pg)  
+[11. Normálová matice](#11-normálová-maticeodvození-a-využití-v-pg)
 
-### 1. Vykreslovaci pipeline
-### 2. Textury v OpengGL (typy a použití v PG)
-### 3. Identifikace (zbuffer+stencil), unproject
-### 4. Promitani
-### 5. Osvětlovací phongův systém (definice a použití v PG)
-### 6. Algoritmy viditelnosti(maliruv a z-buffer)
-### 7. Bezier (definice a použití v PG)
-### 8. Rotace 3D a 2D (odvození, použití v PG)
-### 9. Skybox (použití v OpenGL)
-### 10. Transformace (pouziti v PG)
-### 11. Normálová matice(odvození a využití v PG)
-[Odkaz na nadpis](#heading-ids)
 
 ### 1. Vykreslovaci pipeline
 
@@ -40,7 +39,7 @@
         - Na projektu u každého fragemntu udržuje id drawable objectu
 
 
-### 2. Textury v OpengGL (typy a použití v PG) {#test}
+### 2. Textury v OpengGL (typy a použití v PG)
 
 - **UV**
     - UV mapa funguje jako graf nad obrázkem
