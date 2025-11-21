@@ -124,7 +124,7 @@
 | --- | --- |
 | (a + b) = a + b | (1-t)P<sub>0</sub> + tP<sub>1</sub>
 | (a + b)<sup>2</sup> = a<sup>2</sup> + 2ab + b<sup>2</sup> | (t-1)<sup>2</sup>P<sub>0</sub> + 2(1-t)P<sub>1</sub> + t<sup>2</sup>P<sub>2</sub>
-| (a + b)<sup>3</sup> = a<sup>3</sup> + 3a<sup>2</sup>b + 3ab<sup>2</sup> + b<sup>3</sup> | (1-t)<sup>3</sup> + 3(1-t)<sup>2</sup>t + 3(1-t)t<sup>2</sup> + t<sup>3</sup>
+| (a + b)<sup>3</sup> = a<sup>3</sup> + 3a<sup>2</sup>b + 3ab<sup>2</sup> + b<sup>3</sup> | (1-t)<sup>3</sup>P<sub>0</sub> + 3(1-t)<sup>2</sup>tP<sub>1</sub> + 3(1-t)t<sup>2</sup>P<sub>2</sub> + t<sup>3</sup>P<sub>3</sub>
 - **t** - Pozice na křivce
 - **P0,P1...** - Kontrolní body
 - **a** ≈ (1-t)
