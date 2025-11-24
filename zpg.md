@@ -12,7 +12,7 @@
 [11. Normálová matice](#11-normálová-maticeodvození-a-využití-v-pg)
 
 
-### 1. Vykreslovaci pipeline
+# 1. Vykreslovaci pipeline
 
 ![alt text](image.png)
 
@@ -39,7 +39,7 @@
         - Na projektu u každého fragemntu udržuje id drawable objectu
 
 
-### 2. Textury v OpengGL (typy a použití v PG)
+# 2. Textury v OpengGL (typy a použití v PG)
 
 - **UV**
     - UV mapa funguje jako graf nad obrázkem
@@ -69,7 +69,7 @@
     - Určují jak se má povrch *chovat*
     - Roughness, metalic...
 
-### 3. Identifikace (zbuffer+stencil), unproject
+# 3. Identifikace (zbuffer+stencil), unproject
 
 - **Zbuffer**
     - Každý fragment uchovává hloubku jak daleko je od kamery
@@ -83,7 +83,7 @@
     - **M<sub>model</sub><sup>-1</sup> * M<sub>view</sub><sup>-1</sup> * M<sub>project</sub><sup>-1</sup> * clipPoint**
 ![alt text](image-2.png)
 
-### 4. Promitani
+# 4. Promitani
 - **Ortografické**
     - Zachovává poměry stran a úhly
     - Požívá se převážně v v CADech
@@ -91,7 +91,7 @@
     - Vytváří efekt hloubky
     - Prespektiva -> dál = menší
 
-### 5. Osvětlovací phongův systém (definice a použití v PG)
+# 5. Osvětlovací phongův systém (definice a použití v PG)
 ![alt text](image-3.png)
 - **I** - Intezita světla
 - **r** - Materiálová složka
@@ -109,7 +109,7 @@
 - **HM - Blinn**
     - Fí - Úhel mezi half vecotrem (poloviční mezi vektorem světla a vektorem ke kameře/oku) a normálovým vektorem
 
-### 6. Algoritmy viditelnosti(maliruv a z-buffer)
+# 6. Algoritmy viditelnosti(maliruv a z-buffer)
 - **Malířův algoritmus**
     - Seřadí polygony dle vzdálenosti
     - Vykresluje od nejvzdálenějšího k nejbližšímu
@@ -119,11 +119,16 @@
     - Každý fragment uchovává depth Z
     - Prochází fragmenty, uchovává ten nejbližší, najde-li bližší, zahodí ten přechozí a uloží si nový nejbližší
 
-### 7. Bezier (definice a použití v PG)
+# 7. Bezier (definice a použití v PG)
+- Obecný vzorec
+- $P(t) = \sum_{i=0}^{n} P_iB_i^n(t)$
+- Suma všech bodů, násobených všemi bázovými funkcemi
+    - Součet všech bázových funkcí pro libovolné t: 1
+
 | **A+B vzorec** | **Bezier** |
 | --- | --- |
 | (a + b) = a + b | (1-t)P<sub>0</sub> + tP<sub>1</sub>
-| (a + b)<sup>2</sup> = a<sup>2</sup> + 2ab + b<sup>2</sup> | (t-1)<sup>2</sup>P<sub>0</sub> + 2(1-t)P<sub>1</sub> + t<sup>2</sup>P<sub>2</sub>
+| (a + b)<sup>2</sup> = a<sup>2</sup> + 2ab + b<sup>2</sup> | (t-1)<sup>2</sup>P<sub>0</sub> + 2t(1-t)P<sub>1</sub> + t<sup>2</sup>P<sub>2</sub>
 | (a + b)<sup>3</sup> = a<sup>3</sup> + 3a<sup>2</sup>b + 3ab<sup>2</sup> + b<sup>3</sup> | (1-t)<sup>3</sup>P<sub>0</sub> + 3(1-t)<sup>2</sup>tP<sub>1</sub> + 3(1-t)t<sup>2</sup>P<sub>2</sub> + t<sup>3</sup>P<sub>3</sub>
 - **t** - Pozice na křivce
 - **P0,P1...** - Kontrolní body
@@ -131,7 +136,14 @@
 - **b** ≈ t
 - **\+** každý člen * kontrolní bod P<sub>x</sub>
 
-### 8. Rotace 3D a 2D (odvození, použití v PG)
+### Fergusonova křivka
+- **P(t) = F<sub>0</sub>(t)V<sub>0</sub> + F<sub>1</sub>(t)V<sub>1</sub> + F<sub>2</sub>(t)v<sub>0</sub> + F<sub>3</sub>(t)V<sub>1</sub>**
+    - F<sub>0</sub>(t) = 2t<sup>3</sup> - 3t<sup>2</sup> + 1
+    - F<sub>1</sub>(t) = -2t<sup>3</sup> + 3t<sup>2</sup>
+    - F<sub>2</sub>(t) = t<sup>3</sup> - 2t<sup>2</sup> + t
+    - F<sub>3</sub>(t) = t<sup>3</sup> - t<sup>2</sup>
+
+# 8. Rotace 3D a 2D (odvození, použití v PG)
 ![alt text](image-4.png)
 - **HM**
     - cos(0) = 1
@@ -142,7 +154,7 @@
 - Rotace probíhá kolem středu world space
 - Rotace tělesa kolem vlastního středu požaduje translaci tělesa do středu wordl space -> rotace -> přesun zpátky
 
-### 9. Skybox (použití v OpenGL)
+# 9. Skybox (použití v OpenGL)
 - **GL_TEXTURE_CUBE_MAP**
     - Sampluje podle směrových vektorů, ne UV
     - Složený z šesti 2D textur +- x,y,z
@@ -158,12 +170,12 @@
     - Jakýkoliv další objek se vykreslí 'před' skybox
     - Kopíruje translaci z kamery/oka, aby nešlo 'vyjít' ven
 
-### 10. Transformace (pouziti v PG)
+# 10. Transformace (pouziti v PG)
 - **Transalce**
 - **Rotace**
 - **Scale**
 
-### 11. Normálová matice(odvození a využití v PG)
+# 11. Normálová matice(odvození a využití v PG)
 - Některé tranformace upraví normálové vektory špatným způsobem
 - N = (M<sup>-1</sup>)<sup>T</sup>
 - N poté násobí normálový vektor
