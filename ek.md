@@ -157,4 +157,74 @@
 
 #### Finanční plán
 - soubor doporučení
-- 
+#### Typ investorů
+- Nonplaners - nic netuší *//me right now*
+- Simple planners - mají představu, ale ne plán
+- Serious planners - mají představu a plán, ale nedodržují
+- Successful planners - úspěšně dodrželi plán
+#### Etapy finančního plánu
+- Akumulace
+- Konsolidace
+- Fáze spotřebování
+- Fáze darů
+#### Finanční analýza
+- Rentabilita - informace o kapitálu a schopnosti tvořit zisk
+- Likvidita - schopnost splácet včas
+- Aktivita - intezita využití složek majetku
+- Zadluženost - dlouhodobá stabiltia firmy
+- Bod zvratu - minimální množství produkce, aby firma nebyla ve ztrátě
+#### Úhrada zboží
+- Platba předem
+    - Na účet
+    - Předfaktura
+    - Proforma
+    - Zálohová faktura
+- Platba při dodání
+    - Hotovost
+    - Dobírka
+- Následná platba
+    - Faktura s datem splatnosti
+#### Platba z pohledu kupujících
+- Okamžité vypořádání
+    - Hotově
+    - Kartou
+    - Bankovní převod
+    - ...
+- Splátky
+    - Splátkový kalendář
+    - Půjčka
+    - Úvěr
+    - Hypotéka
+- Pronájem
+    - Pravidelné splátky
+    - Platba za užití
+#### Platba z hlediska měny
+- Lokální měna
+- FIAT měna, USD, EUR...
+- Kryptoměna
+#### Platební brány
+- ComGate
+- GoPay
+- Pays.cz
+- PayU
+- Stripe
+- Gloal payments
+- ...
+- Confirmo (krypto platební brána)
+#### Stanovení prodejní ceny
+- Pořizovací cena / Výrobní náklady
+- Marže předpokládaného zisku
+- Recyklační poplatky
+- Autorské poplatky
+- DPH
+- Koncová cena
+#### Dodatečné navýšení ceny
+- Manipulačni poplatek
+- Balné
+- Poštovné
+- Doprava
+- Neziskové navýšení ceny
+#### Poštovné
+- Obvykle s 21% DPH (vyjímka česká pošta)
+- *Jsou li náklady na poštovné 100,- Kč, musím požadovat 121,- Kč, jinak mohu zaúčtovat pouze 83,30 Kč*
+#### DPH
