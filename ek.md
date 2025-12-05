@@ -1,4 +1,6 @@
 ## PRVNÍ ČÁST
+#### Fasovo moudro
+- **Nedělejme něco proto, aby to bylo, ale proto, aby z toho něco bylo!**
 #### Podnikatelský trojúhelník firmy
 - Náklady
 - Riziko
@@ -295,3 +297,175 @@
 - Dodací list
 - Dobropis
 - Vratka
+---
+## TŘETÍ ČÁST
+#### Šest koncepcí marketingu 
+1. **Výrobní orientace**
+   - Maximální dostupnost, minimální cena
+    - Poptávka převyšuje nabídku (přesycený trh)
+1. **Výrobková orientace**
+    - Produkty s vyšší kvalitou
+    - Marketing zaměřený na zdokonalení 
+1. **Prodejní orientace**
+    - Nasycený trh
+    - Intezivní distribuce, propagace... 
+1. **Tržně marketingová orientace**
+    - Přesně definovaný
+1. **Společenský marketing**
+    - Cíle firmy, požadavky zákazníků, zájmy společnosti
+1. **Holistické orientace**
+    - Vzájemné vztahy s klíčovými partnery
+    - Interní marketing (Každý zaměstnanec)
+    - Společenské, etické či ekologické zájmy
+#### Marketingové prostředí
+- Mikroprostředí
+- Makroprostředí
+    - Demografické - Lidé, jednotlivci
+    - Společenské - Tradice, normy, postoje
+    - Ekonomické - Inflace, ceny, úspory
+    - Technologické
+    - Přírodní - Klimatické podmínky, nerostné bohatství
+    - Politické a právní - Zákony, legislativy
+#### Zdroje informací
+- Interní údaje firem
+- Marketingové zpravodajství
+- Marketingový výzkum
+#### Získávání informací
+- Primární informace
+    - Pozorování
+    - Experiment
+    - Dotazování
+- Sekundární informace
+    - Interní zdroje
+    - Externí zdroje
+#### Typy dotazování
+| Forma | Výhody | Nevýhody |
+| --- | --- | --- |
+| Osobní rozhovor | Přímý kontakt, množství informací | Vysoké náklady, vliv aktéra |
+| Písemně | Nízke náklady, objektivnější odpovědi | Nízka návratovost, zdlouhavost, Riziko vlivu třetí strany |
+| Telefonicky (fuj) | Rychlost, přímý kontakt | Není zachována anonymita | 
+#### Segmentace trhu
+- Spotřebitelského trhu
+    - Geografická (Město, stát)
+    - Demografická (Věk, pohlaví)
+    - Socioekonomická (Vzdělání, příjem)
+    - Psychografická (Zájmy, hodnoty)
+    - Chování (očekáváný zisk, postoj k značce)
+- Trhu firem
+    - Demografická (Velikost firmy, odvětví)
+    - Kritéria provozu (Technologie)
+    - Nákupní přístupy (Organizace nákupu, vztahy)
+    - Osobní charakteristiky (Věrnost, postoj k riziku)
+#### Marketingový mix
+- 4P-7P
+    1. Product
+    1. Price
+    1. Place
+    1. Promotion
+    1. People
+    1. Politics
+    1. Public opinion 
+- 4C
+    1. Customer
+    1. Cost
+    1. Convinience
+    1. Communications
+- 4A
+    1. Awarness
+    1. Availability
+    1. Affordability
+    1. Acceptability
+#### Tvorba produktu
+- Jádro
+- Vlastní produkt
+    - Kvalita
+    - Varianta produktu
+    - Design
+    - Obal
+    - Značka
+- Rozšířený produkt
+- #### Životní cyklus produktu
+![Tohle nebudu opisovat xd. Btw tak blbě croplé to je v prezentaci.](image-5.png)
+#### Stanovení ceny
+- Spodní hranice
+- Horní hranice
+- Cena konkurence
+- Metodika stanovení ceny
+#### Faktory ceny
+- Firemní cíle
+- Náklady
+- Poptávky
+- Konkurence
+- Fáze životního cyklu produktu
+- Právní a regulační opatření
+#### Cenová politika
+- Orientace na přežití
+- Orientace na maximánlní zisk
+- Orientace na největší podíl na trhu
+- Všeobecný přístup
+#### Příjmý prodej
+- Na zakázku, se servisem
+- Malému množství odběratelů
+    - Vlastní prodejní prostory
+    - Automaty
+    - Bez prodejních prostor
+    - Elektronický prodej
+#### Nepříjmý prodej
+![Už začínám být tired :(](image-6.png)
+---
+## ČTVRTÁ ČÁST
+#### Cloud služby
+- Azure
+- AWS (Amazon Web Service)
+- Google cloud
+- Digital ocean
+#### Virtualizace
+- Open stack
+- vmWare
+- XEN
+#### Docker
+- CoreOS
+- Docker Engine
+#### Operační systémy na bázi Linux
+- Ubuntu
+- Debian
+- Cytrix
+- Redhat
+- TailOS
+#### Web servery
+- Apache
+- nGinx
+- Varnish
+#### Verzovací systémy
+- GitHub
+- GitLab
+- BitBucket
+#### Skriptovací jazyky
+- Perl
+- Ruby
+- PHP
+- GO
+- Python
+
+#### Databáze <3
+- PostgerSQL <3
+- MySQL
+- MariaDB
+- Percona
+- NonSQL
+    - MongoDB
+    - H-Base
+    - Cassandra
+#### Fulltext serach
+- Lucene
+- Elastic search
+- Solr
+#### Response desing
+- Bootstrap
+- ZURB Foundation
+- Angular JS
+- React JS
+#### Mobilní aplikace
+- Cordova
+- Xamarin
+- ~~Android studio~~ *//Pls no, save yourself*
