@@ -153,6 +153,7 @@
 - SEM (Search Engine Marketing)
     - SEO (Search Engine Optimalization) - Cíl získat vyšší pozice při vyhledávání 
     - PPC (Pay-Per-Click) - Platba za proklik
+---
 ## DRUHÁ ČÁST
 
 #### Finanční plán
@@ -228,3 +229,69 @@
 - Obvykle s 21% DPH (vyjímka česká pošta)
 - *Jsou li náklady na poštovné 100,- Kč, musím požadovat 121,- Kč, jinak mohu zaúčtovat pouze 83,30 Kč*
 #### DPH
+- Základní sazba - 21%
+- Snížená sazba - 15%
+    - Teplo, voda, potraviny
+    - Ubytování, oprava zdravotního zařízení
+    - Dovoz uměleckých děl, sběratelství
+    - Budovy sociálního bydlení
+- Osvobozená sazba - 0%
+- **Placení**
+    - Dobrovolný plátce
+        - Vysoke vstupní investice
+        - Solární elektrárna
+    - Povinné placení
+        - Obrat za předchozích 12 měsíců >= 1.000.000,- Kč
+        - Příjmy ze zahraničí
+        - Právní subjekt vytvořen na základě obchodního zákoníku
+    - Výkazy DPH
+        - Čtvrtleltní (do 10.000.000,- Kč)
+        - Měsíční
+        - Do 25. následujícího měsíce 
+#### Zvláštní typy daní
+- Spotřební
+    - Daň z minerálních olejů
+    - Z lihu, piva, vína
+    - Tabák
+- Ekologická
+    - Zemní plyn
+    - Tuhá paliva
+    - Elektřina
+#### Slevy
+- Skonto - rychlé placení
+- Bonus - větší odběr
+- Bonifikace - zkrácení dodací lhůty
+- Rabat - množstevní sleva
+- Sleva
+- Sleva za horší jakost
+- Sleva jako výprodej
+- 
+- *Sleva nesmí generovat ztátu*
+- *Nekontrolované slevy jsou kritické*
+- *Sleva je nákupní pobídka*
+- *Slevy je vhodné časově limitovat*
+#### Věrnostní program
+- Sleva na základě dlouhodobé spolupráce
+- Sleva na základě obratu
+- Příležitostné akce
+#### Nekalá soutěž
+- Klamvá reklama
+- Klamavé označování zboží a služeb
+- Vyvolávání nebezpečí záměny
+- Parazitování na pověsti
+- Podlpácení
+- Zlehčování
+- Srovnávácí reklama
+- Porušení obchdního tajemství
+- Ohrožování zdraví
+#### Prodejní cyklus
+- Nabídka
+- Objednávka
+- Proforma
+- Faktura
+- Doklad o úhradě
+- Záruční list
+    - Reklamace
+- Dodací list
+- Dobropis
+- Vratka
