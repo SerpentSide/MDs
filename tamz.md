@@ -80,6 +80,16 @@ On config change, Android kills Activity and restarts it. Automaticly saves the 
     - Names the component 
 - Implicit
     - Asks sytem to perform service without telling which class should do this service
+    - Android tries to find Activity that mathes, this is called **Intent resolution**
+        - Based on the **Intent** and **Intent filtres**
+        - Intent filters specified in AndroidManifest.xml
+            - Action
+            - Data
+            - Category  
+            `Intent inte = new Intent();`  
+            `inte.setAction(Intent.ACTION_SEND);`  
+            `inte.setType("plain/text");`  
+            `startActivity(inte);`
 #### Intents objects
 - Name (opt)
 - Action
@@ -90,3 +100,90 @@ On config change, Android kills Activity and restarts it. Automaticly saves the 
 - Extras
     - Key-values pairs
 - Flags
+#### App manifest
+- Defines structure, Intent filters and permissions
+- uses-sdk define min and max SDK
+- uses-configuration specify supported devices
+- uses-feature specify hardware features and min verision of OpenGL
+- supports-screens specify which screens u can and cant use
+    - smallScreens
+    - normalScreens
+    - largeScreens
+    - anyDensity
+- You must include all activities
+- **Launch methods**
+    - standart - new Activity launched and added to backstack
+    - singleTop - if Activity instance exists on top, Android routes to the instance instead of creating new
+    - singleTask - new Activity is created in new task, if task already exists, routes to the task instead
+    - singleInstance - same as singleTask, except the Activity is always single and only member of its task
+#### Resources
+- **Non-source** code entity
+- Layout
+- Strings
+- Images
+- Menus
+- Animations
+- Located in `/res`
+- **R class** - automaticaly generated. Cotains references for each resource
+- `package.resource_type.resource_name`
+- Code: `R.string.hello`
+- XML: `@string/hello`
+- Default
+    - Should be used regardles of config
+- Alternative
+    - Designed for specific config
+#### Assets
+- To store **any** kind of data
+## Basic UI
+- View
+    - any view have UID
+- ViewGroup - View that holds other views
+#### Jetpack compose
+- Composable functions
+- Faster iteration
+- Eliminates boilerplate (XML + findViewById)
+- Easier testing
+- @Composable - tells the compiler this is gonna be UI
+#### Callbacks
+- onClick()
+- onLongClick()
+- onFocusChang()
+- onKey()
+- onTouch()
+- ...
+#### States
+- Local state - Hold by one composable
+- Hoisted state - Moved into shared parent component
+#### Layout
+- Container - Layout Manager
+- Constrain
+    - Created manualy in code or XML
+- Linear
+    - Horizontaly/Verticaly
+- Relative
+    - Lays widgets based on relations
+- Table 
+    - Grid base on specification
+- Scrollview
+- Nesting composable
+    - Column, row, box, spacer...
+#### Fragments
+- Behavior or a portion of UI
+- Life cycle
+    - Resumed - Visible
+    - Paused - Another activity has focus
+    - Stopped - Not visible
+- States
+    - onAttach
+    - onCreate
+    - onCreateView
+    - onActivityCreated
+    - onDestroyView
+    - onDestroy
+    - onDetach
+#### Menus
+- Options
+- Contextual
+- Contextual action bar
+- Popup menu
+## Data storage
