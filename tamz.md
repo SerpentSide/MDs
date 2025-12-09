@@ -460,3 +460,204 @@ android:name="android.permission.ACCESS_NETWORK_STATE" />`
 - Cluster of conected sensor chips
 ## Cryptography
 - Study of matemathical techniques related to aspects of information security 🤓
+#### Goals
+- Confidentality - Only intended recipient can read the data
+- Data integrity - Data cannot be modified without detection
+- Authentication - Verifying the identity of the user or server
+- Availability - Accesible when needed
+- Non-repudiation - A sender cannot deny having sent a message
+- Forward secrecy - Past comms stay confidential even if future keys are compromised
+#### Evaluation criteria
+- Level of security
+- Functionality
+- Methods of operation
+- Performance
+- Ease of implementation
+#### Terms
+- Plaintext - Message in natural format
+- Ciphtext - Message altered to be unreadable by anyone except recipients
+- Key - Sequence that controls the operation and behavior of algorithm
+- Keyspace - Total number of possible values of keys in crypto algorithm
+- Cryptosystem - Algorithm, key and functions
+#### Implementation
+- `javax.crypto`
+    - Classes and interfaces
+    - Cipher - Class used to encrypt and decrypt data
+        - Provider based
+        - Static factory method `getInstance()`
+        - Argument is three part name of desired encryption. e.g. `"DES/CBC/PKCS5Padding"`
+    - KeyMint - Standardized HAL for key operations, os-level storage description
+- Key agreement
+    - Each party calls init() and supplies Key object
+    - After Key exchange, calls doPhase()
+    - doPhase() returns intermediate Key object, and these keys are passed into doPhase() again
+    - After that, each party calls generateSecret(), that returns SecretKey object for the named algorithm
+    - Key material remains **non-exportable**
+    - If device support TEE (trusted execution enviroment), key material is there
+#### Hardware security
+- TEE (Trusted Execution Enviroment)
+    - Stores private keys
+    - Resistant to rooting, tampering
+    - Code isolated from OS
+- StrongBox security chip
+    - Separated hardware 
+    - Pixel and high-end samsungs
+- Titan M / M2
+    - Secure boot, key attestation
+    - Verified boot enforcement
+#### Symetric & Asymetric Algorithms
+- **Symetric**
+    - One key
+    - Cipher and decipher 
+    - Stream cipher
+        - Encrypt single digits
+    - Block cipher
+        - Encrypt blocks of data
+    -  Serpent❤️, Twofish, AES, Blowfish, CAST5
+    - Ceasar cipher
+        - Replacing each letter with one, three places futher
+    - Kama-sutra cipher, Pigpen cipher, Playfair cipher, Rail fence cipher    
+- **Asymetric**
+    - Two keys
+        - Private key
+            - Known only by one person/device
+        - Public key
+            - Known publicly
+        - Diffie-Hellman Key Exchange, ElGamal, eliptic
+curves
+- **Hybrid**
+    - Asymetric distributes symmetric key (known as session key)
+    - Symetric provides bulk encryption
+- Modern use
+    - Symetric
+        - AES-GCM
+        - ChaCha20-Poly1305
+    - Asymemtric
+        - X25519
+        - Ed25519
+        - RSA-2048
+    - Hashing
+        - SHA-256/512
+        - PBKDF2
+        - bcrypt
+#### TEA (Tiny Encryption Algorithm)
+- *Bad*
+- 64-bit blocks
+- 128-bit key
+#### AES (Advanced Encryption Standart)
+- *Good*
+- 128-bit blocks
+- 128,192 ,256-bit keys
+- 10, 12, 14 rounds 
+    - SubBytes
+    - ShiftRows
+    - MixColumns
+    - AddRoundKey
+#### Modes & Paddings
+- **Modes** - Describe how to repeatedly apply cipher
+- **Padding** - Block ciphers works on fixed size, so it *fills* the block if message is short
+#### Modes of opertions
+- ECB (Electronic codeblock)
+- CBC (Cipher block chaining)
+- GCM (Galois/Counter mode)
+#### DES (Data encryption standart)
+- *Bad*
+- 56-bit key
+- 64-bit blocks
+- Unsecure
+#### FBE (File Based encryption)
+- Splits storage into
+    - Device encrypted storage
+        - Accesible before unlock
+        - Alarm, messages (on locked screen)
+    - Credential encrypted storage
+        - After unlock
+        - Bound to user Pin/Biometrics...
+---
+- For random use `SecureRandom().netBytes(bytes)`
+## Reverse negineering protection
+- **APK** - Instalable package
+- **AAB** - Android app bundle
+    - Base APK - Functionality
+    - Configuration APK - Config based on size, language...
+    - Dynamic Feature APK - Opt modules
+- Developer send AAB -> Google play generate APK for users
+    - Harder to obtain original code form GPlay
+#### Smali
+- Assembly laguage for Dalvik VM
+    - Register-based VM
+- baksmali - dissasembler
+#### Jadx
+- High-quality java & kotlin decompiler
+- Integrated smali
+- Cross-references
+- "Show used resources" view
+---
+- Many apps move logic to C/C++ -> harder to reverse
+- Heap dump - Snaphsot of all the objects in memory
+- Code protectors
+    - Packers, optimizers, protectors
+    - Proguard, Dexguard, Allatori
+## Monetization
+#### Google play
+- $25 USD registration fee
+- Živnostenský list 1000,- Kč
+- VAT Registration free
+- Developer program standart
+    - 15% service fee \>$1M
+    - 30% service fee \<$1M
+- Subscriptions
+    - 15% from day one
+- Media expirience program
+    - Video, music, books
+    - Fees as low as 10%
+- EU DMS (Digital Market Acts)
+    - Fee redction to 12%/27%
+#### Five Ps
+- Product
+- Price
+- Place
+- Promotion
+- People
+#### Pay models
+- In-app purchases
+- Subscriptions
+- Advertising
+- Hybrid monetization
+- Paid apps
+- Licensing technology
+- Ai-powered add-ons
+    - Credit based usage
+- B2B & SaaS mobile clients 
+#### Metrics
+- LTV - Lifetime value
+- ARPU - Average revenue per user
+- ARPPU - Average revenue per paying user
+- Churn rate - % of users who stoped using the app
+#### Advertising based revenue
+- Banner ads
+- Interstitial ads
+    - Deliver ad at the end of the flow (e.g. level completion)
+- Native ads
+    - Integratet seamlessly into app (e.g. instagram feed ad)
+- Affiliate ads
+    - Advertising product/app/service through my app
+- Reward ads
+    - Watch ad for extra life
+#### Freemium
+- Basic functionality for free
+- Charge for aditional feature
+- (e.g McAffe: Basic functionality like downloading viruses free. Actualy blocking viruses behind paywall)
+#### In-app purchasing
+- Models
+    - One time purcharse
+    - Micro transactions
+    - Subscriptions
+    - Shopping other products
+#### Data monetization
+- Selling user data
+- Heavily restricted
+#### Android piracy
+- **Lucky patcher mentioned❤️**
+- Server-side validation
+- Dynamic assets delivery
