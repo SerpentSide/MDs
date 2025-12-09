@@ -459,3 +459,4 @@ android:name="android.permission.ACCESS_NETWORK_STATE" />`
 \*wink\*
 - Cluster of conected sensor chips
 ## Cryptography
+- Study of matemathical techniques related to aspects of information security 🤓
