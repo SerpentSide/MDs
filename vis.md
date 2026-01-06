@@ -77,3 +77,20 @@ Programovací nebo deklarativní jazyk na konkrétní úzkou oblast
     - Oddělený od hlavního kódu, má vlastní parser. SQL, HTML
 - **Internal**
     - Využití syntaxe existujíícho jazyka. LINQ v C#
+## Informační systém
+Interkace mezi lidmi, procesy, daty. Ke zpracovávání informací
+#### Vodopád
+- Requirements
+- Desing
+- Implementation
+- Verification
+- Maintenance
+#### Unified process
+- Use-case driven
+- Architecture-centric
+- Risk-focused
+- 4 fáze
+    - Zahájení
+    - Rozpracování
+    - Konstrukce
+    - Nasazení
