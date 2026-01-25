@@ -80,7 +80,7 @@
     - `gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(vertexPos, 1.0);`
 - **Unproject**
     - Převádí objekt ze screen space do world space
-    - **M<sub>model</sub><sup>-1</sup> * M<sub>view</sub><sup>-1</sup> * M<sub>project</sub><sup>-1</sup> * clipPoint**
+    - **M<sub>view</sub><sup>-1</sup> * M<sub>project</sub><sup>-1</sup> * clipPoint**
 ![alt text](image-2.png)
 
 # 4. Promitani
@@ -184,3 +184,5 @@
 - **Transpozice** - Prohození řádků a sloupců  
 | a  b | --- | a  c |  
 | c  d | --- | b  d |
+# 12. Pohledová matice
+- Up, down, right
