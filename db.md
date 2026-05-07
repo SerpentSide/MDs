@@ -179,5 +179,282 @@ Ukazatel na řádek
 - Explicitní - Definuje uživatel
     - Umožňuje použití OPEN, FETCH, CLOSE
     - Umožňuje pracovat s více příkazy
-Práce s kurzory:
-    - 
+    ---
+- Práce s kurzory:
+
+    - ``CURSOR Nazev IS Select * from...``
+    - ``OPEN Nazev``
+    - ``FETCH Nazev INTO Nazvepromenne``
+    - ``CLOSE Nazev``
+
+- Sugar syntax
+    - ```
+        FOR Nazev in (Select * from...) LOOP
+        //...
+        END LOOP
+        CLOSE Nazev
+        ```
+    - Ve FOR cyklu, není potřeba otevírat, v každém průchodu cyklu kurzor ukazuje na jeden řádek
+
+#### Statické a Dynamické SQL
+- Statické SQL
+    - V době kompilace jsou známy všechny objekty
+    - Oracle kontroluje syntaxi před spuštěním (V případě PL/SQL)
+    - Lepší výkon
+- Dynamické SQL
+    - Když nejsou v době kompilace známy všechny objekty
+    - Používáme-li název sloupce/taqbulky z parametru
+    - EXECUTE IMMEDIATE
+        ```
+        v_sql := 'DELETE FROM employees WHERE employee_id = 100';
+        EXECUTE IMMEDIATE v_sql;
+        ```
+    - Umožńuje použití DDL (Statické ne)
+## Analýza IS
+**Analýza informačního systému slouží k návrhu dat a funkcí systému.**
+#### Analýza návrhu
+- Vize - Zadání
+- Role - Role k přístupu kdb, orpávnění
+- Vstupy - Jaké data budou vstupem
+- Výstupy - Jaké data budou výstupem
+- Funkce - Funkcionalita systému
+
+#### Konceptuální model
+**Konceptuální model popisuje entity a vztahy pomocí ER diagramu.**
+- Vysokoúrovňový model nezávislý na konkrétní db
+- Řeší entity, atributy, vztahy mezi entitami
+- Kardinalita, povinnost
+#### Datový model
+**Datový model převádí návrh do tabulek, klíčů a databázových struktur.**
+- Logický
+    - Tabulky, PK, FK
+    - Řeší normalizaci, redundanci, integirtní omezení
+- Fyzický
+    - Konkrétní implementace v DBMS
+    - Řeši datové typy, indexy, partitioning, constraints
+        - Partitioning - Rozdělení dat na části.  DB umí pracovat jenom s některými částmi, takže zrychluje query.
+            - Dělení zpravidla podle:
+                - Rozsahu:
+                    - Datum => 2025, 2026...
+                    - ID => 1-1M, 1M-2M...
+                - List parititoning:
+                    - Podle konkrétních hodnot (Language (CZ, SK, PL...))
+                - HASH partitioning
+                - KEY partitioning
+        - Menší indexy usnadňují práci, ale špatně navržené partitiony může výkon zhoršit
+            - Join, unique constraints, foreing keys
+
+#### Stavová analýza
+**Stavová analýza řeší životní cyklus objektů a změny stavů.**
+- Definuje business logiku, kontroluje povolené operace
+- Popisuje změny objektů v čase
+    - Objednávka může mít vztahy
+        - Vytvořená, zaplacená, expedovaná, doručená, zrušená...
+- Stavový diagram
+    - Ukazuje stavy, přechody, události, podmínky změn
+    ![alt text](image-9.png)
+
+#### Funkční analýza
+**Funkční analýza popisuje procesy systému a datové toky, často pomocí DFD a minispecifikací.**
+- Co systém dělá, jake procesy probíhají, jak data proudí systémem
+- = Popis funkcí, procedur, triggerů, složitějších selectů...
+- Analyzuje funkce systému a aktéry, výstupem jsou minispecifikace
+    - Minispecifikace - Detailní popis jednotlivých funkcí/procesů
+        - Používá přirozený jazyk (Minispecifikace nesmí být závislá na konrétním prostředí)
+        - Specifikovaná v bodech, každý bod => jeden příkaz
+        - Vstup (zákazník), výstup (nová objednávka), pravidla (zákazník musí existovat, zboží musí být na skladu)
+#### Návrh formuláře (Doporučuju MS Access💀)
+**Návrh formulářů řeší způsob komunikace uživatele se systémem a vazbu na databázové operace CRUD.**
+- Řeší UI
+    - Jak budou data zadaná, zobrazována, editována
+    - Cílem je přehlednost, jdnoduchost, validace vstupů
+- Formulář by měl načítat pouze data potřebná pro daný formulář
+- Principy
+    - Prvořadost uživatele
+        - Zachovávat zvyklosti vzhledu a uspořádání
+    - Jednotnost
+        - Jednotný styl ovládání a vzhledu
+    - Vlídnost
+        - Uživatel je snowflake, nevypisovat "CHYBA debile", ale "Zadej celé číslo."
+    - Minimalizovat čas pro získaní informací
+        - Co nejméeně kroků k získání cíle
+    - Úplnost a správnost
+    - Maximální spolehlivost
+    - Umožnit uživateli změnit volbu
+    - Optimalizovat množství výstupních informací
+        - Třeba pro komentáře zobrazit 10 a tlačítko "načíst další", místo 30k komentářů
+
+## Transakce
+- Atomická operace - Provede se najednou, nejde udělat jenom část, nastane-li při jejím vykonávání chyba, jsou všechny změny vráceny zpět.
+- BEGIN TRANSACTION - Začátek transakce
+- COMMIT - Pro potvrzení všech změn
+- ROLLBACK - Pro vrácení předchozího stavu
+- Nesmí se zanořovat. Ani by to z definice nedávalo smysl
+- Oracle má autocommit na DDL, nedává se do transakcí
+    - PostgreSQL, SQL Server, SQLite povoluje DDL v transakci, MySQL ne
+- Vlastnosti transakce
+    - Obsahuje sekvenci příkazů
+    - Převádí databázi z jednoho korektního stavu na jiný korektní stav
+    - Databáze však nemusí být korektní v celém průběhu transakce
+    - Musí splňovat ACID
+        - Atomicity
+            - Transakce musí být atomická, dále nedělitelná. Všechy příkazy puď projdou, nebo žádny neprojde
+        - Correctness
+            - Transakce převádí korektní stav databáze do jiného korektního stavu
+databáze, mezi začátkem a koncem transakce nemusí být databáze v korektním stavu.
+        - Isolation
+            - Transakce jsou izolovány, změny provedé jednou transakcí nejsou vidět v jiných, dokud není provedem commit
+        - Durability
+            - Po potvrzení změn data v databázi zůstavají trvalými i po pádu systému
+- ROLLBACK
+    - Pro možnost použití Rollback, všechny změny využívají log, nebo journal. Uživatel nepřistupuje přímo k datům. V případě rollbacku lze dohledat předchozí hodnoty a vrátit do původního stavu
+        - Log - Záznam změn. Převážne se používá, hlavně v relačních db
+        - Journal - Spíše historický pojem, používá se v embedded DB(např. SQLite)
+- Potvrzovací bod - Korektní stav databáze
+    - Commit vytváří Potvrzovací bod
+    - Rollback vrací k předchozímu potvrzovacímu bodu
+    - V okamžiku potvrzení
+        - Všechny data jsou trvale uloženy do db
+        - Všechny adresy uvolněny
+        - Všechny zámky uvolněny
+### Sériový plán
+- Transakce se provádí za sebou
+- Ekvivalentní plány - Dva plány jsou ekvivalentní, pokud dávají stejný výsledek
+- T1: READ(A), T1: WRITE(A), T1: COMMIT, T2: READ(A), T2: WRITE(A), T2: COMMIT
+### Sérializovatený plán
+- Tranakce se mohou prolínat, ale nezavazí si
+- T1: READ(A), T2: READ(B), T1: WRITE(A), T2: WRITE(B), T1: COMMIT, T2: COMMIT
+- Výsledek musí odpovídat nějakému sériovému plánu (V tomto případě je jedno jestli (T1,T2), nebo (T2,T1))
+- Zvyšuje výkon, umožňuje paralelizaci
+### Zotavení
+- Zápis do logu je jednodušší než do DB (Db řeší indexování, aktualizaci tabulek, views) Log jenom přilepí na konec souboru instrukce
+- Při chybě může nastat problém, že v logu jsou aktualizované hodnoty, ale v db ne
+- UNDO
+    - Stav transakce přerušené chybou není známý, musí být zrušená
+- REDO
+    - Transakce byla úspěšne dokončená COMMITnutá a zapsaná do logu, data nebyly převedené do DB, musí se provést znova
+- Techniky zotavení
+    - **Odložená aktualizace (NO-UNDO / REDO)**
+        - Aktualizace jsou uložené v paměti
+        - COMMIT zapíše hodnoty do logu a potom do DB -> Pravidlo dopředného zápisu
+        - Při chybě není potřeba UNDO, změny nebyly v DB
+        - \+ Výkon (minimalizace I/O)
+        - \- Přetečení paměti, velká expanze local buffers
+
+            ![alt text](image-11.png)
+    - **Okamžitá aktualizace (UNDO / NO-REDO)**
+        - Každá aktualizace zapisuje do logu původní a do db novou hodnotu okamžitě -> Pravidlo dopředného zápisu
+        - Při cyhbě se musí provést UNDO, v db jsou nové hodnoty, musí se tam vrátit ty staré z logu
+        - Nevyužívá se cache buffer
+        - \+ Nepřeteče paměť
+        - \- Velký ppočet zápisů do DB
+
+            ![alt text](image-12.png)
+    - **Kombinovaná technika (UNDO / REDO)**
+        - Při aktualizaci jsou nové i staré hodnoty zapsané do logu
+            - Když je hodnota 1 a transakce provede hodnota = 2, do logu přibude:
+                - UNDO: hodnota=1
+                - REDO: hodnota=2
+        - COMMIT zapíše hodnoty do logu
+        - po určitém časovém intervale docházi ke knotrolnímu bodu (checkpoint):
+            - zapíše informace z vyrovnávací paměti do DB
+            - do logu zapíše info o checkpointu
+            ---
+        - Update uloží do logu UNDO a REDO hodnoty
+        - COMMIT uloží do logu záznam COMMIT a finalní hodnoty
+        - Checkpoint uloží do db aktuální hodnoty ve vyrovnoávácí paměti
+
+    ![alt text](image-13.png)
+
+### Zotavení po kontrolním bodu (tc → tf)
+
+| Situace | Stav v kontrolním bodu (tc) | Mezi tc a tf | Zotavení |
+|---|---|---|---|
+| **T1** začala a byla úspěšně ukončena před tc | nové hodnoty zapsané z logu do DB | – | není potřeba (změny už jsou v DB v čase tc) |
+| **T2** začala před tc a byla úspěšně ukončena po tc | původní hodnoty v logu (UNDO), část změn už v DB | nové hodnoty zapsané do DB při COMMIT a do logu | DBS provede **REDO** dokončené transakce |
+| **T3** začala před tc, ale nebyla úspěšně ukončena | původní hodnoty v logu (UNDO), některé změny už v DB | změny pouze v paměti (necommitnuté) | DBS provede **UNDO** nedokončených změn |
+| **T4** začala po tc a byla úspěšně ukončena | – | nové hodnoty zapsané do logu při COMMIT (včetně záznamu COMMIT) | DBS provede **REDO celé transakce** |
+| **T5** začala po tc a nebyla úspěšně ukončena | – | změny pouze v paměti (bez COMMIT) | není potřeba (nic není v logu ani v DB) |
+
+### Algoritmus zotavení
+- Vytovří se záznamy transakcí UNDO a REDO
+- Do UNDO se vloží všechny tranaskce, které nebyly potvrzené před checkpointem (T2,T3)
+- REDO je prázdný
+- DBS prochází log od posledního chekcpointu, pokud je pro transakci nalezen commit, transakce se přesune z UNDO do REDO (T2)
+- DBS procházi log a ruší změny se seznamu UNDO
+- DBS prochází log a přepracuje transakce ze seznamu REDO
+- DB je v korektním stavu
+
+#### Savepoints
+- SAVEPOINT Název - Vytovření
+- ROLLBACK Název - Zrušení všech změn od Savepointu
+- RELEASE Název - Zruší savepoint, nelze rollbacknout
+- po skončení transakce jsou všechny Savepointy releasnuté
+
+### Souběh
+- Situace, kdy více transakcí přistupuje ke stejným objektům
+- Tři možnosti konfliktu
+    - READ-WRITE
+    - WRITE-READ
+    - WRITE-WRITE
+- Problémy souběhu
+    - **Stará aktualizace**
+        - A přečte, B přečte, A zapíše, B zapíše
+        - Ztratí se aktualizace A
+    - **Nepotvrzená závislost (Špinavé čtení, Dirty reading)**
+        - B zapíše, A přečte, B rollback
+        - B zapíše, A zapíše, B rollback
+        - A pracuje s nepotvrzenými hodnotami (dirty reading)
+    - **Nekonzistentní analýza**
+        - A počítá součet zůstatku na účtech
+        - B Uprostřed analýzy pošle 100kč z první na poslední
+        - A spočítá špatný výsledek
+    - **Neopakovatelné čtení**
+        - A přečte, B zapíše, A přečte
+        - Opakované čtení jednoho záznamu vrací jiné výsledky
+    - **Výskyt fantomů**
+        - A přečte záznamy hodnota>100 (např. 20 záznamů), B přidá záznam hodnota=105 (v tuhle dobu je záznamů 21, A má stále jenom 20)
+#### Řízení souběhu
+- **Zamykaní**
+    - Pesimistický přístup, předpoklad, že se bude transakce ovlivňovat
+    - Typy zámků:
+        - Sdílený S - Pro čtení, více transakcí může mít S
+        - Výlučný X - Pro zápis, jenom jedna tranakce může mít X
+    - Zamykání se provádí automaticky, uživatel na to nešmatá
+    - Když A drží zámek X, nikdo nedostane žádný jiný, ani S
+    - Když A drží S, každý další může dostat taky S, ale dokud je alespoň jeden S, nikdo nemůže dostat X
+    - Když transakce nemůže dostat zámek, přechází do stavu čekání (FIFO)
+    - **Přísné dvojfázové zamykání - Strict 2PL**
+        1. Fáze - Získání zámků
+        2. Fáze - Uvolnění zámků
+        - Může způsobit deadlock [:dídlock:]
+            - Když transakce dvě transakce čekají na zámek té druhé. (T1 dostane zámek na A, T2 dostane zámek na B, T1 Chce zámek na B-> čeká, T2 chce zámek na A->čeká)
+            - Detekce uvíznutí 
+                - Nastavení časového limitu, po kterém se zámek uvolní (provede se rollback)
+                - Detekce cyklu v grafu wait-for. Zaznamenává, jake tranaskce na sebe čekají, jednu z nich vybere a rollbackne
+            - Prevence uvíznutí (Pomocí časových razítek) - Nevýhodou je vysoký počet operací rollback
+                - Wait-Die - Starší transakce čeká, mladší je kuchnutá
+                - Wound-Wait - Starší je kuchnutá, mladší čeká
+
+- **Správa verzí**
+    - Optimistický přístup, předpoklad, že se nebude transakce ovlivňovat
+    - Transakce pracují s konzistentní verzí dat
+    - \+ Žádné zámky, vyšší paralelizace
+    - \- Vyšší paměťová náročnost při vytváření kopií
+    - Efektivnější, když převažují READ operace
+#### Úrovně izolace
+![alt text](image-14.png)
+- **Read uncommited**
+    - Transakce nejou izolované, změny jdou okamžitě vidět i bez COMMIT
+    - Transakce nemají zámky
+- **Read commited**
+    - Transakce čeká na odemčení zámků
+    - Zámky se uvolní po zkončení operace, ne po commit -> může dojít neopakovatelnému čtení
+        - A: dostane zámek, přečte, uvolní zámek, B: dostane zámek, změní uvolní zámek, A: dostane zámek, přečte (jiná hodnota)
+- **Repeatable read**
+    - Transakce ma zámky S na všechny řádky, které používá a X na všechn které vkládá, aktualizuje nebo odstraňuje
+    - Zámky se uvolní až na konci transakce
+- **Serializable**
+    - Transakce ma zámky S a X navšechny řádky, na které má vliv
+- **Snapshot**
+    - Podobné jako setializable, akorát využívá verzování, ne zámky
