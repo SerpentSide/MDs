@@ -34,6 +34,9 @@
 - Vztah mezi atributy v db
 - X -> Y (Y je funkčne závislé na X)
     - Pokud je více záznamů, které obsahují sterjné X, musí mít stejné Y
+     - Triviální - Y je podmnožina X
+    - Netriviální - Y není podmnožina X
+    - Totálně netriviální - Y sjednocení X je prázná množina
 - Uzávěr X - množina atributů, závislá na množině atributů X
 - Armstrongovy axiomy
     - Pravidla k odvozování funkčních závislostí
@@ -52,7 +55,14 @@
             - X -> Y => XZ -> YZ
         - Zúžení
             - X -> Y a Z je podmnožinou Y => X -> Z
-
+- Výpočet uzávěru
+    - Zadání: Uzávěr pro A. A->D, D->C, AC->B, B->E
+    - Pracovní množina X{A} - Pokud je levá strana závislosti podmnožinou pracovní množiny, přidat pravou stranu závislosti do pracovní množiny
+    - A->D: A je v X, takže přidat D do X => X{A,D}
+    - D->C: => X{A,C,D}
+    - AC->B: => X{A,B,C,D}
+    - B->E: => X{A,B,C,D,E}
+    - Výsledek je {A,B,C,D,E}
 #### ORMD
 Objektově relační datový model. Využívají ho například PostgreSQL, Oracle Database
 - Rozšiřuje RM o vlastnosti objektů (komplexní datové typy, zapouzdření, dědičnost, metody, transakce)
@@ -457,4 +467,102 @@ databáze, mezi začátkem a koncem transakce nemusí být databáze v korektní
 - **Serializable**
     - Transakce ma zámky S a X navšechny řádky, na které má vliv
 - **Snapshot**
-    - Podobné jako setializable, akorát využívá verzování, ne zámky
+    - Podobné jako serializable, akorát využívá verzování, ne zámky
+
+## Vykonávání dotazů v databázových systémech
+
+### Fyzický návrh databáze
+
+- Převádí konceptualní model na konkrétní fyzický návrh
+- Každý dbs má vlastní specifikace a omezení -> více postupů na tvorbu fyzického návrhu
+- Definuje datové struktury, indexy, logické objetky
+- Řeší uložení dat na nejnižší úrovni
+- Typy tabulek
+    - Každý záznam tabulky má ROWID
+    - Tabulka typu halda
+        - Záznamy nejsou uspořádané, uloží se tam, kde je zrovna místo
+        - Záznamy nejsou mazány, pouze označeny jako smazané
+        ```
+        CREATE TABLE Zakaznici(
+            id INT
+        )
+        ```
+        - Rychlé inserty
+    - Shluková tabulka
+        - Seřazeny podle zvoleného klíče (typicky primární)
+        - Implementace zpravidla B/B+-Stromy
+        - Lepší vyhledávání, hořsí inserty (data se musí zatřídit), rychlejší order by a nižší fragmentace
+        ```
+        CREATE TABLE Zakaznici(
+            id INT PRIMARY KEY CLUSTERED
+        )
+        ```
+    - MySQL - PK automaticky clustered
+    - SQL Server, PostgreSQL přes příkaz clusterd
+    - Oracle má svoji verzi (who wouldhave guessed), fugnuje jinak. (Oracle clusters -> Něco jiného než clustered table)
+- Index
+    - Umožňuje rychlejší vyhledávání
+    - ROWID ukazuje na konkrétní záznam
+        - Jednoduchý index
+            - Klíč obsahuje jeden atribut
+        - Složený index
+            - Klíčem je více než jeden atribut
+    - Využívají se na atributy, které se často vyskytují ve where.
+    - Každý index zvyšuje počet operací při změnách v db
+#### Vykonávání dotazů
+- Výběr plánu
+    - **SQL Parsing**
+        - Zkontroluje syntaxi
+        - Ověří existenci tabulek
+        - Ověří práva
+    - **SQL Rewrite**
+        - Implmentuje VIEW
+        - Odstraní zbytečné poddotazy
+        - Transformuje JOINY
+    - *Sběr statistik*
+        - *Počet řádků, unikátních hodnot, velikostí tabulek...*
+    - **Query optimizer (Execution plan, cost-based optimatization)** vybere nejlepší plán
+        - **Převod dotazy do interní formy**
+            - Interní forma je dotazovací strom
+            - Eliminuje syntaxi jazyka
+        - **Převod do kanonické formy**
+            - Odstranění rozdílů, nalezení efektivnějšího tvaru
+            - Aplikuje transofrmační pravidla, zachovává ekvivalenci
+        - **Vygenerování plánu dotazu**
+            - Každému plánu je přiřaazená cena (na základě operací)
+            - Vybírá se ten nejlepší (nejlevnější)
+    - Query optimizer řeší jestli použít index, nebo celou tabulku, pořadí joinů, typy joinů, jaké indexy použít
+        - Full table scan
+            - Systém načte celou tabulku
+            - Prochází sekvenčně a pro každý řádek kontroluje podmínku
+        - Index (Unique)
+            - Vyhledá jeden klíč v indexu, kdy v podmínce je indexovaný atribut
+        - Index (Range)
+            - Najde první odpovídající hodnotu, pokračuje sekvenčně dokud se nedostane mimo range
+- Logické operace
+    - Selekce - výběr řádků
+    - Projekce - výběr sloupců
+    - Join - spojení tabulek (nested loops, hash join, merge join)
+    - Sort - třízení
+## Návrh a implementace datové vrstvy
+### Objekotvě relační mapování (ORM)
+**Technika, která zpřístupňuje relační data pro objektové prostředí**
+- Převod mezi tabulky z DB a třídami v C#/Java...
+- Použití ORM usnadňuje provádění CRUD. Programátor se nemusí zabývat SQL
+- Implementace
+    - Nástroje třetích stran
+        - Rychlá tvorba aplikace
+        - Snadná změna SRBD
+        - Nižší výkon a kontrola nad sql
+    - Vlastní implementace
+        - Plná kontrola nad SQL dotazy
+        - Strávený čas nad implementací
+- Návrhové vzory
+    - Table Data Gateway
+    - Row Data Gateway
+    - Active Record
+    - Data Mapper
+- DAO (Data access object)
+    - Třída nebo rozhraní, která reprezentuje konkrétní datový zdroj (například tabulka kniha)
+- DTO (Data transfer object)
+    - Jednen objekt reprezentuje jednu instanci třídy (Book book = new Book(5, "The Priory of the Orange Tree", "Samantha Shannon");)
