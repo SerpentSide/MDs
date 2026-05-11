@@ -20,7 +20,7 @@
         - Vztahy
             - Kardinalita
             - Povinost
-- Databázový - závislý na technologii, ale ne na konkrétním jazyce
+- Datový - závislý na technologii, ale ne na konkrétním jazyce
     - Přibývá FK, rozepisuje se M:N, dataové typy
 - Fyzický - reprezentuje fyzické uložení dat
 ---
@@ -36,7 +36,7 @@
     - Pokud je více záznamů, které obsahují sterjné X, musí mít stejné Y
      - Triviální - Y je podmnožina X
     - Netriviální - Y není podmnožina X
-    - Totálně netriviální - Y sjednocení X je prázná množina
+    - Totálně netriviální - Y průnik X je prázná množina
 - Uzávěr X - množina atributů, závislá na množině atributů X
 - Armstrongovy axiomy
     - Pravidla k odvozování funkčních závislostí
@@ -121,7 +121,7 @@ Objektově relační datový model. Využívají ho například PostgreSQL, Orac
 - Selekce (Restrikce) - které řádky chceme (Where)
 - Projekce - které sloupce chceme (SELECT sloupec1, sloupec2...)
 #### Agregační funkce
-- Můžou být použité v select a having
+- Můžou být použité v select a having, order by
 - Vrací jednu hodnotu z více hodnot ve sloupci
     - MIN - čísla, měny, data, znaky
     - MAX - čísla, měny, data, znaky
@@ -392,7 +392,7 @@ databáze, mezi začátkem a koncem transakce nemusí být databáze v korektní
 - REDO je prázdný
 - DBS prochází log od posledního chekcpointu, pokud je pro transakci nalezen commit, transakce se přesune z UNDO do REDO (T2)
 - DBS procházi log a ruší změny se seznamu UNDO
-- DBS prochází log a přepracuje transakce ze seznamu REDO
+- DBS prochází log a přepíše transakce ze seznamu REDO do DB
 - DB je v korektním stavu
 
 #### Savepoints
@@ -437,15 +437,14 @@ databáze, mezi začátkem a koncem transakce nemusí být databáze v korektní
     - **Přísné dvojfázové zamykání - Strict 2PL**
         1. Fáze - Získání zámků
         2. Fáze - Uvolnění zámků
-        - Může způsobit deadlock [:dídlock:]
-            - Když transakce dvě transakce čekají na zámek té druhé. (T1 dostane zámek na A, T2 dostane zámek na B, T1 Chce zámek na B-> čeká, T2 chce zámek na A->čeká)
-            - Detekce uvíznutí 
-                - Nastavení časového limitu, po kterém se zámek uvolní (provede se rollback)
-                - Detekce cyklu v grafu wait-for. Zaznamenává, jake tranaskce na sebe čekají, jednu z nich vybere a rollbackne
-            - Prevence uvíznutí (Pomocí časových razítek) - Nevýhodou je vysoký počet operací rollback
-                - Wait-Die - Starší transakce čeká, mladší je kuchnutá
-                - Wound-Wait - Starší je kuchnutá, mladší čeká
-
+    - Může způsobit deadlock [:dídlock:]
+        - Když transakce dvě transakce čekají na zámek té druhé. (T1 dostane zámek na A, T2 dostane zámek na B, T1 Chce zámek na B-> čeká, T2 chce zámek na A->čeká)
+    - Detekce uvíznutí 
+        - Nastavení časového limitu, po kterém se zámek uvolní (provede se rollback)
+        - Detekce cyklu v grafu wait-for. Zaznamenává, jake tranaskce na sebe čekají, jednu z nich vybere a rollbackne
+    - Prevence uvíznutí (Pomocí časových razítek) - Nevýhodou je vysoký počet operací rollback
+        - Wait-Die - Starší transakce čeká, mladší je kuchnutá
+        - Wound-Wait - Starší je kuchnutá, mladší ček
 - **Správa verzí**
     - Optimistický přístup, předpoklad, že se nebude transakce ovlivňovat
     - Transakce pracují s konzistentní verzí dat
