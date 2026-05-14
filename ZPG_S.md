@@ -85,6 +85,66 @@
 ![alt text](image-25.png)
 
 ### Základní křivky
+- Křivka je určená pomocí:
+    - Kontrolních bodů
+    - Případě také tečných vektorů
+- Typy:
+    - Interpolované
+    - Aproximační
+    - Spline
+    - Beziérovy
+    - Fergusonovy kubiky
 
+### Beziér
+- $P(t) = \sum_{i=0}^{n} P_iB_i^n(t)$
+    - $B_{i,n}(t) = \binom{n}{i}t^i(1-t)^{n-i}$
+    - Suma všech bodů, násobených všemi bázovými funkcemi
+    - Bernsteinovy polynomy (Bázové funkce)
+        - Součet všech bázových funkcí pro libovolné t: 1
+        - Každá bázová funkce je nezáporná
+        - Funkce jsou symetrické
+        - Rekurizvní definice
+        - Určují, jak moc budou jednotlivé body ovlivňovat křivku
+    - Tvořená minimálně 2 body (V praxi se používá řetězení 4 bodových)
+        - Linérní 2 body, kvadratický 3 body, kubický 4 body...
+    - Leží v konvexním obalu bodů
+    - Je hladká a plynulá
+
+ **A+B vzorec** | **Bezier** |
+| --- | --- |
+| (a + b) = a + b | (1-t)P<sub>0</sub> + tP<sub>1</sub>
+| (a + b)<sup>2</sup> = a<sup>2</sup> + 2ab + b<sup>2</sup> | (t-1)<sup>2</sup>P<sub>0</sub> + 2t(1-t)P<sub>1</sub> + t<sup>2</sup>P<sub>2</sub>
+| (a + b)<sup>3</sup> = a<sup>3</sup> + 3a<sup>2</sup>b + 3ab<sup>2</sup> + b<sup>3</sup> | (1-t)<sup>3</sup>P<sub>0</sub> + 3(1-t)<sup>2</sup>tP<sub>1</sub> + 3(1-t)t<sup>2</sup>P<sub>2</sub> + t<sup>3</sup>P<sub>3</sub>
+- **t** - Pozice na křivce
+- **P0,P1...** - Kontrolní body
+- **a** ≈ (1-t)
+- **b** ≈ t
+- **\+** každý člen * kontrolní bod P<sub>x</sub>
+
+### Fergusonova křivka
+- Kubická parametrická křivka:
+    - Dva krajní body
+    - Dva tečné vektory
+
+
+- $P(t)=F_0(t)V_0+F_1(t)V_1+F_2(t)v_0+F_3(t)v_1$
+    - $V_0, V_1$ — krajní body křivky
+    - $v_0, v_1$ — tečné vektory (tangenty)
+    - $t \in [0,1]$ — parametr určující polohu bodu na křivce
+
+- Bázové funkce
+    - $F_0(t)=2t^3-3t^2+1$
+    - $F_1(t)=-2t^3+3t^2$
+    - $F_2(t)=t^3-2t^2+t$
+    - $F_3(t)=t^3-t^2$
+### de Casteljau algoritmus
+- Algoritmus pro výpočet Bezierovy křivky. Umožňuje také dělení křivky.
+- Jsou Body P0, ..., Pn
+- Výpočet nových bodů pomocí interpolace. (Počet nových bodů = počet původních - 1)
+- Spojit nové body křivkami.
+- Opakovat interpolaci + křivky, dokud nezůstane jeden bod.
+- Výsledný bod je bod na křivce pro dané t.
+![alt text](image-27.png)
 
 ![alt text](image-23.png)
+
