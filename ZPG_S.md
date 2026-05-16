@@ -145,6 +145,8 @@
 - Opakovat interpolaci + křivky, dokud nezůstane jeden bod.
 - Výsledný bod je bod na křivce pro dané t.
 ![alt text](image-27.png)
+![alt text](image-28.png)
+![alt text](image-29.png)
 
 ![alt text](image-23.png)
 
