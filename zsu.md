@@ -76,4 +76,6 @@
 - Nelineární vztah
     - Atributy spolu souvisí ale ne lineárně (Atributy výkon a věk => Peak kolem 20)
 ### Kovariace
+- Míra vyjádření, jak moc se proměnné shodují
+
 ### Korelace
