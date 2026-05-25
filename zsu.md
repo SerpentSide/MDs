@@ -49,3 +49,31 @@
     - Celkový soubor všech objektů nebo jedinců
 - Vzorek
     - Podmnožina populace, která je vybrána pro analýzu
+- Výběr by měl zastupovat všechny kategorie
+- Rozptyl
+    - Kvadratická odchylka od průměru
+    ![alt text](image-30.png)
+    - Směrodatná odchylka
+    ![alt text](image-31.png)
+- Pravděpodobnostní distribuce
+![alt text](image-32.png)
+- Důležité hodnoty
+    - Průměr (mean)
+    - Medián (median)
+    - Modus (mode)
+    - Interquartile range (Q1 - Q3)
+    - Variace (Xmax - Xmin)
+    - Očekávaná hodnota (E(X)) - Teoretický průměr náhodné veličiny
+        - Očekávasná hodnota hodu kostkou: 3.5
+## Vztahy mezi atributy
+- Nezávislost
+    - A nemá vliv na B
+- Korelace
+    - Pokud A klesá/stoupá B klesá/stoupá
+- Kauzální vztah
+    - Příčina a následek
+    - A způsobuje změnu B (snížíš teplotu => platíš víc za topení)
+- Nelineární vztah
+    - Atributy spolu souvisí ale ne lineárně (Atributy výkon a věk => Peak kolem 20)
+### Kovariace
+### Korelace
