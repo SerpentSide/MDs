@@ -268,3 +268,34 @@ Fyzické pořadí dat v tabulce
     - Otočení řádků na sloupce
 - **UNPIVOT**
     - Otočení sloupců na řádky
+
+## Triggery
+- DML Trigger
+    - Tabulkový trigger
+    - Reaguje na INSERT, UPDATE, DELETE v tabulce
+    - ``CREATE TRIGGER name ON Orders INSTEAD OF INSERT AS BEGIN ... END``
+- DDL Trigger
+    - Reaguje na CREATE, ALTER, DROP v databázi
+        - CREATE_TABLE, ALTER_TABLE, DROP_TABLE
+        - ON DATABASE, ON ALL SERVER
+    - ``CREATE TRIGGER name ON DATABASE FOR CREATE_TABLE AS BEGIN ... END``
+## Computed column
+- Řádek, který se počítá automaticky
+- ```
+    CREATE TABLE Orders (
+        OrderID INT,
+        Quantity INT,
+        Price DECIMAL(10,2)
+        Total AS Quantity * Price
+    );
+    ```
+- Nonpersisted
+    - ``Total AS Quantity * Price``
+    - Neukládá se na disk
+    - Počítá se při selectu
+- Persisted
+    - ``Total AS Quantity * Price PERSISTED``
+    - Ukládá se na disk
+    - Může být indexovaný
+    - Rychlejší seelct (nepočítá hodnotu pro každý řádek)
+    
